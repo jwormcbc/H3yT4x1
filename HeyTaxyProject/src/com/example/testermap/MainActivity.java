@@ -28,7 +28,7 @@ static final int segundos=2; //tiempo de espera de los calls a WS
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
   
-//inicia call a web service para tener vores iniciales de posiciones de taxys 
+//inicia call a web service para tener vores iniciales de posiciones de taxys _______ | added to check coommit 
   Thread networkThread = new Thread() {
       @Override
       public void run() {
