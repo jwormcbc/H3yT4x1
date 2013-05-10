@@ -15,7 +15,7 @@ import bitcore.objects.Taisi;;
 
 public class BTCaller {
 	//private final static String URL = "http://54.244.124.64:8080/HT/ServicioTaxero?wsdl"; // amazon 
-	private final static String URL = "http://192.168.1.79:8084/HT/ServicioTaxero?wsdl";
+	private final static String URL = "http://192.168.1.76:8084/HT/ServicioTaxero?wsdl";
 	private HashMap<String, Taisi> hmT=new HashMap<String, Taisi>();
 	
 	
@@ -40,7 +40,7 @@ public class BTCaller {
                  ht.call(SOAP_ACTION, envelope);
                  final  SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
                  final String str = response.toString();
-                 Log.d("call",str);
+                 //Log.d("call",str);
              
                  String diviCadena[]=str.split(",");
                  String divSubCadena[];
@@ -55,13 +55,11 @@ public class BTCaller {
              	 					)
              	 			);
              	 	
-             	 	Log.d("Out"," added " + s);
                  	t++;
                  }
              
               } 
              catch (Exception e) {
-            	 Log.d("Out",e.toString());
                  e.printStackTrace();
              }
             }
@@ -102,7 +100,7 @@ public class BTCaller {
                  int t=1;
                  for(String s:diviCadena){
              	 	divSubCadena=s.split(":");
-             	 	Log.d("Out"," workingg--->>> " + divSubCadena[0] +divSubCadena[1]+divSubCadena[2]+divSubCadena[3] );
+             	 	//Log.d("Out"," workingg--->>> " + divSubCadena[0] +divSubCadena[1]+divSubCadena[2]+divSubCadena[3] );
              	 	hmT.put(String.valueOf(t),//id del hash map
              	 			new Taisi(  //contruimos el obj taisi
              	 		    divSubCadena[0],  //primer valor es el id
@@ -112,11 +110,9 @@ public class BTCaller {
              	 					
              	 			);
              	 	
-             	 	Log.d("Out"," added " + s);
                  	t++;
                  }
-                 Log.d("Out", " Taisis weqrqwer");
-                 Log.d("Out", " Taisis HM ok!: " + hmT.get("1").getId()   +  "  **   " + hmT.get("1").getPosicionActual().latitude);
+                 //Log.d("Out", " Taisis HM ok!: " + hmT.get("1").getId()   +  "  **   " + hmT.get("1").getPosicionActual().latitude);
              
               } 
              catch (Exception e) {

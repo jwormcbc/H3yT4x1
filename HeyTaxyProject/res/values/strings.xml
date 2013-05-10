@@ -4,5 +4,7 @@
     <string name="app_name">HeyTaxy!</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="clearBtn">Clear</string>
+    <string name="reloadBtn">reload</string>
 
 </resources>
