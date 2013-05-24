@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="clearBtn">Clear</string>
     <string name="reloadBtn">reload</string>
+    <string name="title_activity_form">MainActivity</string>
 
 </resources>

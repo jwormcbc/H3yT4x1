@@ -6,6 +6,7 @@ import bitcore.objects.Taisi;
 import bitcore.util.BTCaller;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
@@ -13,6 +14,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,8 +39,7 @@ private  Thread  networkThread,networkThread2;
   setContentView(R.layout.activity_main);
   
 
-  
-  
+
 //inicia call a web service para tener valores iniciales de posiciones de taxys 
    networkThread = new Thread() {
       @Override
@@ -97,10 +100,11 @@ private  Thread  networkThread,networkThread2;
 		if(networkThread.getState().toString().equals("TERMINATED") && networkThread2.getState().toString().equals("TERMINATED")){
 		Log.d("Out", "estado del hilo networkthread y networkthread2  ..  "  + networkThread.getState().toString() + "|" +networkThread.getState().toString() + "  procede a pasar activo");
 		firstMapCharge=false; // para que solo agrege markers
+		
+		
+		////TODO ESTO ES EQUIVALENTE A LO QUE SE HACE AL PRINCIPIO SOLO QUE DE FORMA ANONIMA, y solo se hace si no hay otro hilo corriendo
+		if(!activo){
 		activo=true;
-		
-		
-		////TODO ESTO ES EQUIVALENTE A LO QUE SE HACE AL PRINCIPIO SOLO QUE DE FORMA ANONIMA
 		new Thread(new Runnable() {
 			
 			@Override
@@ -144,7 +148,8 @@ private  Thread  networkThread,networkThread2;
 				  
 			      public void run() {
 			    	  for(int i=1;i<=markers.size();i++){
-			  		  Log.d("Out", " marker: " + taxis.get(String.valueOf(i)).getNombre() + "   id.Taisi: " + taxis.get(String.valueOf(i)).getId()  + "isi: " + taxis.get(String.valueOf(i)).getPosicionActual());
+			  		  Log.d("Out", " marker: " + taxis.get(String.valueOf(i)).getNombre() + "   id.Taisi: " + taxis.get(String.valueOf(i)).getId()+
+			  		 " isi: " + taxis.get(String.valueOf(i)).getPosicionActual()  + "activo == " + activo);
 			    	  markers.get(taxis.get(String.valueOf(i)).getId()).setPosition(taxis.get(String.valueOf(i)).getPosicionActual());
 			    	  markers.get(taxis.get(String.valueOf(i)).getId()).setTitle(taxis.get(String.valueOf(i)).getNombre());
 			    	  
@@ -163,6 +168,7 @@ private  Thread  networkThread,networkThread2;
 			
 			}
 		}).start();
+		}  // Cierre de sentencia if para evitar multiples hilos haciendo lo mismo thread overloaded
 		
 		}
 		
@@ -239,8 +245,31 @@ private void generaTaisis(){
   private void setUpMapIfNeeded() {
 
   if (mMap == null) {
-   mMap = ((MapFragment) getFragmentManager().findFragmentById(
-     R.id.map)).getMap();
+   mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+   mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+	
+	@Override
+	public boolean onMarkerClick(Marker arg0) {
+		// TODO Auto-generated method stub
+	
+		String idMark="0";
+		 for(int i=1;i<=taxis.size();i++){
+				if(taxis.get(String.valueOf(i)).getNombre().equals(arg0.getTitle())){
+					idMark=taxis.get(String.valueOf(i)).getId();
+				}
+				}
+		
+			Intent intent = new Intent(MainActivity.this,FormActivity.class);
+			//startActivity(intent);
+			   intent.putExtra("taxyID",idMark);
+			   final int result=1;
+			      startActivityForResult(intent, result);
+		
+		return false;
+	}
+});
+   
+   
    // Check if we were successful in obtaining the map.
    if (mMap != null) {
     addMarkers();
@@ -258,7 +287,6 @@ private void generaTaisis(){
   
   private void addMarkers() {
 	  markers=new HashMap<String, Marker>();
-	  
 	  int yo=R.drawable.taxito;
 	  
 	  for(int i=1;i<=taxis.size();i++){
@@ -275,6 +303,8 @@ private void generaTaisis(){
 				.title(taxis.get(String.valueOf(i)).getNombre())
 				.snippet("mensaje snippet")
 				.icon(BitmapDescriptorFactory.fromResource(yo))));
+		  
+		  
 	  }
 	
 	  }
