@@ -10,18 +10,19 @@
     tools:context=".FormActivity" >
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnPreguntar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/btnPedir"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/btnPedir"
         android:layout_marginTop="30dp"
         android:background="#0055FF"
-        android:text="Preguntar" />
+        android:text="Preguntar"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnPedir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -29,24 +30,26 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:background="#005500"
-        android:text="Pedir" />
+        android:text="Pedir"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnCancelarRegresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_below="@+id/button2"
+        android:layout_alignLeft="@+id/btnPreguntar"
+        android:layout_alignRight="@+id/btnPreguntar"
+        android:layout_below="@+id/btnPreguntar"
         android:layout_marginTop="21dp"
         android:background="#110000"
-        android:text="Cancelar/Regresar" />
+        android:text="Cancelar/Regresar"
+        android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/btnPedir"
         android:layout_marginBottom="27dp"
         android:layout_marginRight="23dp"
         android:layout_toLeftOf="@+id/textView1"

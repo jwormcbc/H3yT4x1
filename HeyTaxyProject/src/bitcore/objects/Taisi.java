@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class Taisi {
 private LatLng posicionActual;
 private String id="",nombre="";
+private final static String URL = "http://l92.168.1.120:8084/HT/ServicioTaxero?wsdl";
 
 
 
@@ -50,8 +51,7 @@ public void setNombre(String nombre) {
 public void actualizaPosicion(String id){
     final String NAMESPACE = "http://servicios.bitcore/";
     final String METHOD_NAME = "PosicionAcualByID";
-    final String SOAP_ACTION = "http://servicios.bitcore/PosicionAcualByID";
-    final String URL = "http://192.168.1.101:8080/HT/ServicioTaxero?wsdl";
+    final String SOAP_ACTION = "http://servicios.bitcore/"+METHOD_NAME;
 
     Thread networkThread = new Thread() {
         @Override

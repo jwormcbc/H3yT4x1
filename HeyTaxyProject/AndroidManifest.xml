@@ -41,7 +41,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD-rF2H2QwAzm9pFpkv4E4zFt6aufxjINw" />
+            android:value="AIzaSyDwXKRvSMDYc29fuIsN3FwXMNHgdVL7nJ0" />
 
         <activity
             android:name="com.example.testermap.FormActivity"
