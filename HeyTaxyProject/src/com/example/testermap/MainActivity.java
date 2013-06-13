@@ -25,6 +25,13 @@ import android.widget.Toast;
 
 
 
+/*
+ * DEFINITIVO, QUITAS EL TIEMPO REAL DE MOVIMIENTO EN LA OPERACION CUANDO EL TAXY ES PEDIDO!!!!  HAY QUE YA AVANZAR MAS, DEJAREMOS ESO PARA UNA ACTUALIZACION
+ * 
+ * 
+ */
+
+
 public class MainActivity extends Activity {
 private static final String ID="10000";
 private GoogleMap mMap;
@@ -192,88 +199,33 @@ int iiTest=0;
 			
 			@Override
 			public void run() {
-		    	boolean pasa=true; 
 				
 		    	try{  
 		    		
 		    		if(!elegido.equals("ninguno")){
-		    		
-		    			
-		    			
-		    			generaUnicamenteTaisiPedido(elegido,ID);
-				    
-		    			
-		    			Log.d("Out","EYTY unicamente y taxito Yo :"  + elegido + ":"+ID+"| primero" + taxis.size());
+		    		generaUnicamenteTaisiPedido(elegido,ID);
+		    		Thread.sleep(2000);
+				    Log.d("Out","EYTY unicamente y taxito Yo :"  + elegido + ":"+ID+"| primero   " + taxis.size());
 						
 		    		}else{
 		    		generaTaisis();
 		    		}
 		    		Thread.sleep(segundos*1000);
-		    		
-		    		
-		    					if(firstMapCharge)
-		    					setUpMapIfNeeded();
-		    					else
-		    					setUpMapIfNeeded_SinCargarElMapa();
-		    			
-		    		
+		    		runOnUiThread (new Runnable(){ 
+				    				public void run() {
+				    					if(firstMapCharge)
+				    					setUpMapIfNeeded();
+				    					else
+				    					setUpMapIfNeeded_SinCargarElMapa();
+				    				}
+				        });
+		    		Thread.sleep(segundos*1000);
 		    	}catch(InterruptedException e){
 		    		Log.d("Out","Hilo MainActivity   :   " + e.toString());
 		    	}
 		    	
 		    	
-		    	new Thread(new Runnable() {
-					@Override
-					public void run() {
-
-			    	  	while(activo){
-			    	try{  
-			    		if(!elegido.equals("ninguno")){
-			    			
-			    			
-			    		generaUnicamenteTaisiPedido(elegido,ID);
-			    		Log.d("Out","EYTY unicamente y taxito Yo :"  + elegido + ":"+ID+"| segundo  111" + taxis.size());
-			    		Thread.sleep(segundos*2000);
-			    		
-			    		
-			    		}else{
-			    		generaTaisis();
-			    		Log.d("Out","EYTY taxinormal  :"  + elegido + ":"+ID+"|");
-			    		
-			    		}
-		    			 Log.d("Out", "EYTY taxi size mmm: " +taxis.size()+"  22222");// taxis.get(String.valueOf(i)).getNombre());
-			    		for(int i=1;i<=taxis.size();i++){
-			    			taxis.get(String.valueOf(i)).actualizaPosicion(String .valueOf(i));
-			    		}
-		    			
-			    		 
-			    		 
-			    		
-			  runOnUiThread (new Runnable(){ 
-			      public void run() {
-			    	  
-			    	  
-			    	  Log.d("Out", "EYTY marker size: " +markers.size() + "  33333");// taxis.get(String.valueOf(i)).getNombre());
-			    	  for(int i=1;i<=markers.size();i++){
-			  		  Log.d("Out", "EYTY marker: " + taxis.get(String.valueOf(i)).getNombre() + "   id.Taisi: " + taxis.get(String.valueOf(i)).getId()+
-			  		 " isi: " + taxis.get(String.valueOf(i)).getPosicionActual()  + "activo == " + activo   + "   4444");
-			    	  markers.get(taxis.get(String.valueOf(i)).getId()).setPosition(taxis.get(String.valueOf(i)).getPosicionActual());
-			    	  markers.get(taxis.get(String.valueOf(i)).getId()).setTitle(taxis.get(String.valueOf(i)).getNombre());
-			    	  
-			    	  }   
-			    	  
-			    	  iiTest++;
-			      }
-			        });
-			  Thread.sleep(5000);
-			    	}catch(InterruptedException e){
-			    		Log.d("Out","MainHilo MainActivity   :   " + e.toString());
-			    	}
-			    	 } 
-			    	  		
-						
-					}
-				}).start();
+		 
 			
 			
 			}

@@ -15,7 +15,7 @@ import bitcore.objects.Taisi;;
 
 public class BTCaller {
 	//private final static String URL = "http://54.244.124.64:8080/HT/ServicioTaxero?wsdl"; // amazon 
-	private final static String URL = "http://192.168.1.120:8084/HT/ServicioTaxero?wsdl";
+	private final static String URL = "http://192.168.0.3:8084/HT/ServicioTaxero?wsdl";
 	private HashMap<String, Taisi> hmT=new HashMap<String, Taisi>();
 	
 	

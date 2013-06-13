@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class Taisi {
 private LatLng posicionActual;
 private String id="",nombre="";
-private final static String URL = "http://l92.168.1.120:8084/HT/ServicioTaxero?wsdl";
+private final static String URL = "http://l92.168.0.3:8084/HT/ServicioTaxero?wsdl";
 
 
 
